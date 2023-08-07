@@ -242,6 +242,7 @@ There are also additional packages used, all of which equally awesome, but unrel
 
 Do projects ever "finish"? Meh. Here is a list of features that occurred to us that this project might want to include at some point.
 
+- Enhancement to authentication to support an endpoint security decorator per [GitHub issue 1](https://github.com/ericwastaken/ApiFocus/issues/1).
 - Add basic authentication example to AuthenticationHelper.
 - Add example of Oauth to AuthenticationHelper.
 - Enhance the AuthenticationHelper to support multiple Security Schemes as defined in the Swagger 2 specification (schemes can be "any one of" or even combinations.)
