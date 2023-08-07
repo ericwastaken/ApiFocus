@@ -6,26 +6,26 @@ Focus on your API, not boilerplate code! ApiFocus is a scaffold project that bri
 
 **Api Focus** (this project) provides a simple scaffold that can be used to **dynamically** serve a fully functioning REST API from a Swagger 2 (OpenAPI v2) definition file.
 
-This project is 100% Swagger-definition driven! Your API's Swagger definition file provides all the configuration needed for Express to parse, validate and route your endpoints. Once implemented, change the API definition (and update your corresponding controller if necessary), and you change the API!
+This project is 100% Swagger-definition driven! Your APIs Swagger definition file provides all the configuration needed for Express to parse, validate and route your endpoints. Once implemented, change the API definition (and update your corresponding controller if necessary), and you change the API!
 
 A functioning dynamically-driven API can be achieved in a few steps: (detailed instructions later in this document)
 
 1. Download a copy of this project and save it to a location of your convenience.
-1. Create a Swagger 2 (OpenAPI v2) definition file (in YAML format) and save it to the **api** directory.
-1. Write one or more controllers to handle each path & method in your Swagger definition and drop them in the **controllers** directory.
-1. Decide how you want to Authenticate requests (if needed) and implement that. 
-1. Run with your favorite NodeJS runner.
-1. Profit!
+2. Create a Swagger 2 (OpenAPI v2) definition file (in YAML format) and save it to the **api** directory.
+3. Write one or more controllers to handle each path & method in your Swagger definition and drop them in the **controllers** directory.
+4. Decide how you want to Authenticate requests (if needed) and implement that. 
+5. Run with your favorite NodeJS runner.
+6. Profit!
 
-This framework takes your API's Swagger definition and the controllers you write and:
+This framework takes your APIs Swagger definition and the controllers you write and:
 
 1. Handles all the parameter parsing and parameter validation to ensure your controllers receive exactly what the provided Swagger definition requires. This framework will show an error page with API specific information if an endpoint is called with improper parameters or request body.
-1. Creates routes for your controllers (by convention, you place them in the **controllers** directory) based on your Swagger definition file.  
+2. Create routes for your controllers (by convention, you place them in the **controllers** directory) based on your Swagger definition file.  
 
 > **But wait, what do you mean Swagger 2 / OpenAPI 2? Why doesn't this project use OpenAPI 3?**
-> Keen observer you are, young Luke! You're right. OpenAPI 3 is indeed out there and it might even be better. (I mean, v3 is always better than v2, right?) 
+> Keen observer you are, young Luke! You're right. OpenAPI 3 is indeed out there, and it might even be better. (I mean, v3 is always better than v2, right?) 
 > However, since OpenAPI 3 is newer, there is not as much support for it in the libraries that this project relies on. We'll be sure keep an eye out for OpenAPI 3 
-> support and update this project as soon as it's possible to do so! In the meantime, hey, Swagger 2 / OpenAPI 2 works pretty good so you should check it out!
+> support and update this project as soon as it's possible to do so! In the meantime, hey, Swagger 2 / OpenAPI 2 works pretty good, so you should check it out!
 
 ### Where will this work?
 
@@ -40,8 +40,8 @@ This project ultimately relies on Express and other libraries. To the best of ou
 To use this project's main example, simply perform the following steps:
 
 1. Download the project to some location of your choice.
-1. From the command line on the root of the project, install dependencies with `npm i`.
-1. Start the server with `npm start`.
+2. From the command line on the root of the project, install dependencies with `npm i`.
+3. Start the server with `npm start`.
 
 Once the example server starts, direct your browser to any of the following:
 
@@ -84,7 +84,7 @@ This project uses information in your Swagger API definition to properly map con
   - Must match a static method in the Controller file with the signature (req, res). See what a controller needs to look like in the next section of this document.
 
 Once you have a Swagger 2 definition, drop it into the **api** directory of this project. If you name it **swagger.yaml** the default config will pick it up automatically. Otherwise, add the name in your environment's config. For example for NODE_ENV=dev, set your **./config/dev.json5** to:
-```json
+```javascript
 {
   swaggerSpecPath: './api/yourFileName.yaml'
 }
@@ -92,7 +92,7 @@ Once you have a Swagger 2 definition, drop it into the **api** directory of this
 
 ### 3. Create Controllers
 
-Each Path and Method (GET, POST, HEAD, DELETE, etc) in your Swagger definition must match to a Controller file and method in your code.
+Each Path and Method (GET, POST, HEAD, DELETE, etc.) in your Swagger definition must match to a Controller file and method in your code.
 
 Here is a skeleton method that you can use to create all of yours:
 
@@ -207,7 +207,7 @@ Steps you should take include things like (not an exhaustive list):
 - You'll want to use something other than Nodemon to run the app. Docker, PM2 are two great ways to run NodeJS in production environments.
 - Depending on your setup and needs, you might want to front NodeJS by Nginx, Apache or some other web server, maybe even an API gateway of some sort.
 - Implement authentication suitable for your needs. The example here uses a basic ApiKey in a header checked against a constant. There's nothing wrong with an ApiKey approach, but a constant is not something you'll want to do in production!
-- Setup a **prod.json5** file and set your settings, including deciding if you want to expose your API specification file and Swagger-UI.
+- Set up a **prod.json5** file and set your settings, including deciding if you want to expose your API specification file and Swagger-UI.
 
 For much more information on taking a NodeJs app into production, consider a [Duck-Duck-Go](https://duckduckgo.com/?q=nodejs+in+production&t=osx&ia=web) search for [nodejs in production](https://duckduckgo.com/?q=nodejs+in+production&t=osx&ia=web). 
 
@@ -226,7 +226,7 @@ This project relies on the following open-source software for its various featur
   - This ensures that all calls to the API are passed the proper parameters as described in the Swagger definition.
   - Learn more about [swagger-express-middleware](https://github.com/APIDevTools/swagger-express-middleware).
 - swagger-express-router
-  - Creates routes for the API as specified in the Swagger definition.
+  - Creates the routes for the API as specified in the Swagger definition.
   - Each Path & Method in your Swagger definition must have two properties that declare the Controller file and Method that supports the particular path and method. See the section [2. Create a Swagger 2 Definition for your API](#2-create-a-swagger-2-definition-for-your-api) for more information.
   - Note that we provide in this project a **SwaggerRouterHelper** class to dynamically find all the controller files in the **controllers** directory. This is an enhancement that is not included in swagger-express-router. 
   - Learn more about [swagger-express-router](https://github.com/scottie1984/swagger-express-router).
@@ -250,8 +250,6 @@ Do projects ever "finish"? Meh. Here is a list of features that occurred to us t
 - A better way to catch that the swagger specification has x-swagger-router-controller or operationId that can't be mapped to a controller, with individual error. Perhaps a validator that runs before we try to map routes and identifies which controllers are missing. Right now, this is one TRY/CATCH which leaves the developer guessing which controller might be missing, has a bad name, or is not implemented properly.
 - An opinion and documentation on testing for the controllers.
 - Implement tests for the scaffold.
-- An opinion and documentation for supporting API versions. For instance, it could support various Swagger definitions on startup (per config) and then pick the proper controller directory, also using a version path (perhaps also base path inside each swagger definition). Could we even support multiple versions side-by-side, or at least the ability to decide which versions are supported. Requirements need to be defined and an architecture designed and implemented.
+- An opinion and documentation for supporting API versions. For instance, it could support various Swagger definitions on startup (per config) and then pick the proper controller directory, also using a version path (perhaps also base path inside each swagger definition). Could we even support multiple versions side-by-side, or at least the ability to decide which versions are supported? Requirements need to be defined and an architecture designed and implemented.
 - Does it make sense to allow Controllers with the same Name (nested in subdirectories)? If so, implement a mechanism for nested controllers inside subdirectories in the controllers directory that avoids collisions. (At present, all subdirectories are parsed but the controller names need to be unique regardless of directory depth. The behavior of identically named Controller files has not been carefully considered.)
 - Typescript version of the project, or at least, how to use Typescript with it?
-- (low priority, risky) Does it make sense to bring in Swagger Editor into this framework? Probably not since that brings authentication needs. (You would not want anyone editong your Swagger definition.) This is also simple enough to do with a standalone NodeJS project or even a local Docker (or using SwaggerHub).
-- Add a CONTRIBUTING section to the readme with a process for others to help with this project.
