@@ -242,6 +242,7 @@ There are also additional packages used, all of which equally awesome, but unrel
 
 Do projects ever "finish"? Meh. Here is a list of features that occurred to us that this project might want to include at some point.
 
+- Enhancement to authentication to support an endpoint security decorator per [GitHub issue 1](https://github.com/ericwastaken/ApiFocus/issues/1).
 - Add basic authentication example to AuthenticationHelper.
 - Add example of Oauth to AuthenticationHelper.
 - Enhance the AuthenticationHelper to support multiple Security Schemes as defined in the Swagger 2 specification (schemes can be "any one of" or even combinations.)
@@ -252,5 +253,3 @@ Do projects ever "finish"? Meh. Here is a list of features that occurred to us t
 - An opinion and documentation for supporting API versions. For instance, it could support various Swagger definitions on startup (per config) and then pick the proper controller directory, also using a version path (perhaps also base path inside each swagger definition). Could we even support multiple versions side-by-side, or at least the ability to decide which versions are supported? Requirements need to be defined and an architecture designed and implemented.
 - Does it make sense to allow Controllers with the same Name (nested in subdirectories)? If so, implement a mechanism for nested controllers inside subdirectories in the controllers directory that avoids collisions. (At present, all subdirectories are parsed but the controller names need to be unique regardless of directory depth. The behavior of identically named Controller files has not been carefully considered.)
 - Typescript version of the project, or at least, how to use Typescript with it?
-- (low priority, risky) Does it make sense to bring in Swagger Editor into this framework? Probably not since that brings authentication needs. (You would not want anyone editing your Swagger definition.) This is also simple enough to do with a standalone NodeJS project or even a local Docker (or using SwaggerHub).
-- Add a CONTRIBUTING section to the readme with a process for others to help with this project.
